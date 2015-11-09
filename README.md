@@ -1,4 +1,4 @@
-# Several nodes LAN with Vagrant and Virtualbox
+# Several nodes in LAN with Vagrant and Virtualbox
 
 Simple set up to create virtual machine nodes with Vagrant to use as a test machine. Since sometimes creating one or two machines on the notebook was not enough, I wanted to use other computers on the LAN for my tests.
 
