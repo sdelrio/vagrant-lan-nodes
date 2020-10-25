@@ -18,8 +18,8 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
 IMAGE_NAME = "generic/ubuntu1804"
 
 $script = <<SCRIPT
-if [ -f /vagrant/id_rsa.pub ]; then
-  cat /vagrant/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
+if [ -f /home/vagrant/id_rsa.pub ]; then
+  cat /home/vagrant/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
 fi
 parted /dev/vdb print 2> /dev/null
 SCRIPT
@@ -38,6 +38,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :type => 'qcow2'
   end
 
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/id_rsa.pub"
+
   (1..NUM_INSTANCES.to_i).each do |i|
     hostname = "#{BASE_NODE_NAME}#{i}"
     config.vm.define "#{BASE_NODE_NAME}#{i}"do |node|
@@ -45,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.provision "shell", inline: $script
       node.vm.network :private_network,
         :ip => "#{ PRIVATE_NETWORK_PREFIX}#{ i }"
-      node.vm.hostname = "#{BASE_NODE_NAME}-#{i}"
+      node.vm.hostname = "#{BASE_NODE_NAME}#{i}"
     end
     puts "#{ hostname } -->" +
       " CPUs: #{ NODE_CPUS }" +
