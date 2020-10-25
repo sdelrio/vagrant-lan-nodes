@@ -8,7 +8,7 @@ If you put an `id_rsa.pub` on the directory it will copy to all the machines cre
 
 ## Usage
 
-Clone repo and start vagrant:
+Clone repo, enter `virtualbox-win` or `libvirt-linux` directory and start vagrant:
 
 ```
 vagrant up
@@ -20,15 +20,24 @@ By default will create 8 machines with 1GB RAM and 1 CPU each on addresses 192.1
 
 To list your interface names you can use `VBoxManage list bridgedifs` command, if is not in the PATH, then will be on your Virtualbox install directory. You can get just the names with `vboxif.bat` on windows and `vboxif.sh` on Linux/OsX.
 
-## Environment variables
+## Environment variables on Virtualbox
+
+- `NUM_INSTANCES`: Default to 3 instances
+- `NODE_MEM`: Default to 8128 MB
+- `NODE_CPUS`: Default to 4 CPU/node
+- `PRIVATE_NETWORK_PREFIX`: Default to 192.168.66.1
+- `PUBLIC_NETWORK_PREFIX`: Default to 192.168.11.1
+- `BASE_IP_SUBNET`: Subnet, default to 100. (First IP will be `192.168.0.101`, second `192.168.0.102`, ...)
+- `BASE_NODE_NAME`: Basename for nodes, default `node-`. Firs name will be `node-01`, second `node-02`, ...
+
+## Environment variables on libvirt
 
 - `NUM_INSTANCES`: Default to 8 instances
 - `NODE_MEM`: Default to 1024 MB
 - `NODE_CPUS`: Default to 1 CPU/node
 - `BRIDGE_IF`: Name of the bridge adapter to set up the IP address, default to 'Intel(R) Ethernet Connection (2) I218-V'
-- `BASE_IP_NET`: Default to 192.168.0
-- `BASE_IP_SUBNET`: Subnet, default to 100. (First IP will be `192.168.0.101`, second `192.168.0.102`, ...)
-- `BASE_NODE_NAME`: Basename for nodes, default `nodo-`. Firs name will be `nodo-01`, second `nodo-02`, ...
+- `PRIVATE_NETWORK_PREFIX`: Default to 192.168.66.1
+- `BASE_NODE_NAME`: Basename for nodes, default `node-`. Firs name will be `node-01`, second `node-02`, ...
 
 You can set your own scripts to run different nodes without editing `Vagrantfile` just using environment variables. Example
 

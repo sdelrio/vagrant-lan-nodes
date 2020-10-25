@@ -12,9 +12,10 @@ NODE_CPUS = ENV['NODE_CPUS'] || 1
 BRIDGE_IF = ENV['BRIDGE_IF'] || 'Intel(R) Ethernet Connection (2) I218-V'
 
 $script = <<SCRIPT
-if [ -f /vagrant/id_rsa.pub ]; do
+#!/bin/bash
+if [ -f /vagrant/id_rsa.pub ]; then
   cat /vagrant/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
-done
+fi
 SCRIPT
 
 BASE_IP_NET = ENV['BASE_IP_NET'] || "192.168.0"
