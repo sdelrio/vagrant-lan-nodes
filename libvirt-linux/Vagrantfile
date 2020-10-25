@@ -11,8 +11,9 @@ NODE_MEM= ENV['NODE_MEM'] || 8128
 NODE_CPUS = ENV['NODE_CPUS'] || 4
 
 BASE_NODE_NAME = ENV['BASE_NODE_NAME'] || "node-"
+PUBLIC_NETWORK_PREFIX= ENV['PRIVATE_NETWORK_PREFIX'] || "192.168.55.1"  ## 192.168.55.1#{i}
 PRIVATE_NETWORK_PREFIX= ENV['PRIVATE_NETWORK_PREFIX'] || "192.168.66.1"  ## 192.168.66.1#{i}
-BRIDGE_IF = ENV['BRIDGE_IF'] || 'enp5s0'
+BRIDGE_IF = ENV['BRIDGE_IF'] || 'virbr0'
 
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
 IMAGE_NAME = "generic/ubuntu1804"
@@ -45,6 +46,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.define "#{BASE_NODE_NAME}#{i}"do |node|
       node.vm.box = IMAGE_NAME
       node.vm.provision "shell", inline: $script
+
+      node.vm.network :public_network,
+        :dev => BRIDGE_IF,
+        :bridge => BRIDGE_IF,
+        :type => "bridge",
+        :mode => "bridge",
+        :ip => "#{ PUBLIC_NETWORK_PREFIX}#{ i }"
       node.vm.network :private_network,
         :ip => "#{ PRIVATE_NETWORK_PREFIX}#{ i }"
       node.vm.hostname = "#{BASE_NODE_NAME}#{i}"
