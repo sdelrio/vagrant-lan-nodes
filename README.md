@@ -24,24 +24,28 @@ To list your interface names you can use `VBoxManage list bridgedifs` command, i
 
 ### Environment variables
 
-- `NUM_INSTANCES`: Default to 3 instances
-- `NODE_MEM`: Default to 8128 MB
-- `NODE_CPUS`: Default to 4 CPU/node
-- `PRIVATE_NETWORK_PREFIX`: Default to 192.168.66.1
-- `PUBLIC_NETWORK_PREFIX`: Default to 192.168.11.1
-- `BASE_IP_SUBNET`: Subnet, default to 100. (First IP will be `192.168.0.101`, second `192.168.0.102`, ...)
-- `BASE_NODE_NAME`: Basename for nodes, default `node-`. Firs name will be `node-01`, second `node-02`, ...
-
-## libvirt provisioner
-
-### Environment variables
-
 - `NUM_INSTANCES`: Default to 8 instances
 - `NODE_MEM`: Default to 1024 MB
 - `NODE_CPUS`: Default to 1 CPU/node
 - `BRIDGE_IF`: Name of the bridge adapter to set up the IP address, default to 'Intel(R) Ethernet Connection (2) I218-V'
 - `PRIVATE_NETWORK_PREFIX`: Default to 192.168.66.1
 - `BASE_NODE_NAME`: Basename for nodes, default `node-`. Firs name will be `node-01`, second `node-02`, ...
+
+## libvirt provisioner
+
+### Environment variables
+
+- `NUM_INSTANCES`: Default to 3 instances
+- `NODE_MEM`: Default to 8128 MB
+- `NODE_CPUS`: Default to 4 CPU/node
+- `BRIDGE_IF`: Name of the bridge adapter to set up the IP address, default to 'virbr0'
+- `PRIVATE_NETWORK_PREFIX`: Default to 192.168.66.1
+- `PUBLIC_NETWORK_PREFIX`: Default to 192.168.11.1
+- `BASE_IP_SUBNET`: Subnet, default to 100. (First IP will be `192.168.0.101`, second `192.168.0.102`, ...)
+- `BASE_NODE_NAME`: Basename for nodes, default `node-`. Firs name will be `node-01`, second `node-02`, ...
+
+
+## Samples
 
 You can set your own scripts to run different nodes without editing `Vagrantfile` just using environment variables. Example
 
